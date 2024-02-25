@@ -12,13 +12,14 @@
         </h1>
 
         {% if app.user %}
-            <a href="{{ path('app_logout') }}">Se déconnecter</a><br
-        {% else %}
-            <a href="{{ path('app_login') }}">Se connecter</a><br>
-        {% endif %}
-        {% if is_granted('ROLE_ADMIN') %}
-            <a href="{{ path('app_admin') }}">Admin</a><br>
-        {% endif %}
+    <a href="{{ path('app_logout') }}">Se déconnecter</a><br>
+{% else %}
+    <a href="{{ path('app_login') }}">Se connecter</a><br>
+{% endif %}
+{% if is_granted('ROLE_ADMIN') %}
+    <a href="{{ path('app_admin') }}">Admin</a><br>
+{% endif %}
+
 
             Liste des livres :
                             
