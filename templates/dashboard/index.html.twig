@@ -8,28 +8,40 @@
 
     <div class="example-wrapper">
         <h1>
-            Hello
+        Bienvenue {% if app.user%} {{app.user.email}} {% endif %}
         </h1>
 
-        {% if app.user %}
-    <a href="{{ path('app_logout') }}">Se déconnecter</a><br>
-{% else %}
-    <a href="{{ path('app_login') }}">Se connecter</a><br>
-{% endif %}
-{% if is_granted('ROLE_ADMIN') %}
-    <a href="{{ path('app_admin') }}">Admin</a><br>
-{% endif %}
+    <h3>Liste des livres</h3>
 
-
-            Liste des livres :
-                            
-            <ul>
-                {% for livre in livres %}
-                <li><a href="{{ path('app_livre_for_user', { id: livre.id }) }}">{{ livre.Titre }}</a> : - {% for categories in livre.getCategories() %}
-                    {{ categories.getStyle() }} -  
-                  {% endfor %}</li>
-                {% endfor %}
-            </ul>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Titre</th>
+                    <th>Description</th>
+                    <th>Date de parution</th>
+                    <th>Catégories</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for livre in livres %}
+                <tr>
+                    <td><a href="{{ path('app_livre_for_user', { id: livre.id }) }}">{{ livre.titre }}</a></td>
+                    <td>{{ livre.description }}</td>
+                    <td>{{ livre.dateParution ? livre.dateParution|date('Y-m-d') : '' }}</td>
+                    <td>
+                        {% for categories in livre.getCategories() %}
+                            {{ categories.getStyle() }}
+                            <br />
+                        {% endfor %}
+                        </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="5">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
 
     </div>
 {% endblock %}

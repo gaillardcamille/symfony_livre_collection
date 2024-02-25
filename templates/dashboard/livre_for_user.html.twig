@@ -3,26 +3,13 @@
 {% block title %}Livre{% endblock %}
 
 {% block body %}
-    <h1>Livre</h1>
+    <h1>{{ livre.titre }}</h1>
+    <h4>Sorti le {{ livre.dateParution ? livre.dateParution|date('Y-m-d') : '' }}</h4>
+
+    <p>{{ livre.description }}</p>
 
     <table class="table">
         <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ livre.id }}</td>
-            </tr>
-            <tr>
-                <th>Titre</th>
-                <td>{{ livre.titre }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ livre.description }}</td>
-            </tr>
-            <tr>
-                <th>Date de parution</th>
-                <td>{{ livre.dateParution ? livre.dateParution|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
             <tr>
                 <th>Catégories </th>
                 <td>- {% for categories in livre.getCategories() %}
@@ -35,9 +22,9 @@
 <h2>Avis :</h2>
 
     {% if app.user %}
-        <a href="{{ path('app_ajouter_avis', {'livreId': livre.id, 'userId': app.user.id}) }}">Ajouter un avis</a><br>
+        <p><a href="{{ path('app_ajouter_avis', {'livreId': livre.id, 'userId': app.user.id}) }}">Ajouter un avis</a></p>
     {% else %}
-        <a href="{{ path('app_login') }}">Vous avez besoin d'être connecté pour laisser un avis</a><br>
+        <p>Vous avez besoin d'être <a href="{{ path('app_login') }}"> connecté </a>pour laisser un avis</p>
     {% endif %}
     <ul>
         {% for avi in avis %}
@@ -49,5 +36,5 @@
         {% endfor %}
     </ul>
 
-    <a href="{{ path('app_dashboard') }}">back to list</a>
+    <a href="{{ path('app_dashboard') }}">Retour à la page d'accueil</a>
 {% endblock %}

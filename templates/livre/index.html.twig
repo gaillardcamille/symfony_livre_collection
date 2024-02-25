@@ -3,7 +3,7 @@
 {% block title %}Livre index{% endblock %}
 
 {% block body %}
-    <h1>Livre index</h1>
+    <h1>Liste des livres</h1>
 
     <table class="table">
         <thead>
@@ -13,7 +13,7 @@
                 <th>Description</th>
                 <th>Date de parution</th>
                 <th>Catégories</th>
-                <th>actions</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -22,7 +22,7 @@
                 <td>{{ livre.id }}</td>
                 <td>{{ livre.titre }}</td>
                 <td>{{ livre.description }}</td>
-                <td>{{ livre.dateParution ? livre.dateParution|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ livre.dateParution ? livre.dateParution|date('Y-m-d') : '' }}</td>
                 <td>
                     {% for categories in livre.getCategories() %}
                         {{ categories.getStyle() }}
@@ -30,8 +30,8 @@
                     {% endfor %}
                     </td>
                 <td>
-                    <a href="{{ path('app_livre_show', {'id': livre.id}) }}">show</a>
-                    <a href="{{ path('app_livre_edit', {'id': livre.id}) }}">edit</a>
+                    <a href="{{ path('app_livre_show', {'id': livre.id}) }}">Montrer</a>
+                    <a href="{{ path('app_livre_edit', {'id': livre.id}) }}">Modifier</a>
                 </td>
             </tr>
         {% else %}
@@ -42,5 +42,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_livre_new') }}">Create new</a>
+    <a href="{{ path('app_livre_new') }}">Ajouter un nouveau livre</a>
 {% endblock %}

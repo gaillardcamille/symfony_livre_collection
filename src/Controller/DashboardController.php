@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Livre;
 use App\Entity\Avis;
+use App\Entity\User;
 use App\Form\AvisType;
 use App\Repository\LivreRepository;
 use App\Repository\AvisRepository;
