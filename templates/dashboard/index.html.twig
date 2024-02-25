@@ -21,6 +21,11 @@
 
             Liste des livres :
                             
+            <ul>
+                {% for livre in livres %}
+                <li><a href="{{ path('app_livre_for_user', { id: livre.id }) }}">{{ livre.Titre }}</a></li>
+                {% endfor %}
+            </ul>
 
     </div>
 {% endblock %}
